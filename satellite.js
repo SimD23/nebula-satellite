@@ -18,7 +18,18 @@ dotenv.config();
 let self;
 
 const GOOGLE_API = process.env.GOOGLE_API;
+const GIT_REPO = process.env.GIT_REPO;
+const GIT_USER = process.env.GIT_USER;
+const GIT_PASSWORD = process.env.GIT_PASSWORD;
 
+const git = require("simple-git/promise");
+const remote = `https://${GIT_USER}:${GIT_PASSWORD}@${GIT_REPO}`;
+
+git()
+  .silent(true)
+  .clone(remote)
+  .then(() => console.log("finished"))
+  .catch(err => console.error("failed: ", err));
 class Satellite {
   constructor(options = {}) {
     self = this;
@@ -100,7 +111,7 @@ class Satellite {
   }
   initConnection({ ip, port = "2310" }) {
     self.connection = io(`http://${ip}:${port}`);
-    this.loadedModules.push(new GoToUrl({ nebulaIP: ip }));
+    // this.loadedModules.push(new GoToUrl({ nebulaIP: ip }));
 
     this.connection.on("satellite", data => {
       console.log(chalk.green(">>"), data);
@@ -155,20 +166,22 @@ class Satellite {
     return ipAddress;
   }
   heartbeat() {
-    let self = this;
-    let moduleNames = [];
-    let ip = this.getIpAddress();
-    let socket = this.connection.id;
-    let upTime = this.upTime();
-    let info = this.info;
+    const self = this;
+    const modules = [];
+    const ip = this.getIpAddress();
+    const socket = this.connection.id;
+    const upTime = this.upTime();
+    const info = this.info;
+
     for (const module of self.loadedModules) {
-      moduleNames.push({
+      modules.push({
         name: module.name,
         functions: module.functions || [],
         src: module.src,
         data: JSON.stringify(module.data)
       });
     }
+
     satellite.connection.emit("nebula", {
       module: "constellation-manager",
       function: "heartBeatResponse",
@@ -179,7 +192,7 @@ class Satellite {
         ip: ip,
         poweredOn: this.poweredOn,
         upTime: upTime,
-        modules: moduleNames
+        modules: modules
       }
     });
   }
