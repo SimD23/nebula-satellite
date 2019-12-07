@@ -1,0 +1,38 @@
+{
+  "name": "technative-pi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "chrome-launcher": "^0.12.0",
+    "dotenv": "^8.2.0",
+    "esm": "^3.2.25",
+    "execa": "^3.4.0",
+    "googleapis": "^45.0.0",
+    "johnny-five": "^1.0.0",
+    "lodash": "^4.17.15",
+    "node-fetch": "^2.6.0",
+    "nodemon": "^1.18.9",
+    "open": "^7.0.0",
+    "openurl": "^1.1.1",
+    "path": "^0.12.7",
+    "puppeteer": "^2.0.0",
+    "puppeteer-core": "^2.0.0",
+    "readline-sync": "^1.4.10",
+    "serialport": "^7.1.5",
+    "socket.io-client": "^2.2.0",
+    "uuid4": "^1.1.4",
+    "xml2js": "^0.4.22"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon -r esm deepronClient.js",
+    "usb": "nodemon -r esm usb.js",
+    "satellite": "nodemon -r esm satellite.js",
+    "jetpack": "nodemon -r esm jetpack.js"
+  },
+  "author": "Sim Davis",
+  "license": "ISC"
+}
