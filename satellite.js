@@ -18,20 +18,9 @@ dotenv.config();
 let self;
 
 const GOOGLE_API = process.env.GOOGLE_API;
-const GIT_REPO = process.env.GIT_REPO;
-const GIT_USER = process.env.GIT_USER;
-const GIT_PASSWORD = process.env.GIT_PASSWORD;
-
-const git = require("simple-git/promise");
-const remote = `https://${GIT_USER}:${GIT_PASSWORD}@${GIT_REPO}`;
-
-git()
-  .silent(true)
-  .clone(remote)
-  .then(() => console.log("finished"))
-  .catch(err => console.error("failed: ", err));
 class Satellite {
   constructor(options = {}) {
+    console.log("************************");
     self = this;
     this.poweredOn = new Date();
     this.infoPath = path.join(__dirname, "info.json");
