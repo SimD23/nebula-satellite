@@ -1,6 +1,6 @@
 import open from "open";
 import { SatelliteModule } from "./SatelliteModule";
-
+import opener from "opener";
 export class GoToUrl extends SatelliteModule {
   constructor(options = {}) {
     super(options);
@@ -14,19 +14,19 @@ export class GoToUrl extends SatelliteModule {
       payload.value = this.src;
     }
     this.src = payload.value;
-
-    (async () => {
-      // Opens the value in the default browser.
-      // const browser = await puppeteer.launch({
-      //   executablePath: "/usr/bin/chromium-browser"
-      // });
-      console.log(">> OPENING", payload.value);
-      await open(payload.value, {
-        app: [
-          "chrome",
-          "--window-position=0,0 --kiosk  --noerrdialogs --disable-infobars"
-        ]
-      });
-    })();
+    opener("http://google.com");
+    // (async () => {
+    //   // Opens the value in the default browser.
+    //   // const browser = await puppeteer.launch({
+    //   //   executablePath: "/usr/bin/chromium-browser"
+    //   // });
+    //   console.log(">> OPENING", payload.value);
+    //   await open(payload.value, {
+    //     app: [
+    //       "chrome",
+    //       "--window-position=0,0 --kiosk  --noerrdialogs --disable-infobars"
+    //     ]
+    //   });
+    // })();
   }
 }

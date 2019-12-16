@@ -20,7 +20,19 @@ let self;
 const GOOGLE_API = process.env.GOOGLE_API;
 class Satellite {
   constructor(options = {}) {
-    console.log("************************");
+    console.log("***************************************");
+    console.log("***************************************");
+    console.log("***************************************");
+
+    console.log(
+      "*********",
+      chalk.green("Launching New Satellite"),
+      "**********"
+    );
+    console.log("***************************************");
+    console.log("***************************************");
+    console.log("***************************************");
+    console.log("***************************************");
     self = this;
     this.poweredOn = new Date();
     this.infoPath = path.join(__dirname, "info.json");
@@ -28,8 +40,16 @@ class Satellite {
     this.id = this.info.name === "DEV" ? uuid4() : this.info.id || uuid4();
     this.info.id = this.id;
     this.getNebulaIP();
-    this.loadedModules = [];
+    this.loadedModules = [new GoToUrl()];
     this.saveFile(this.infoPath, this.info);
+    console.log(
+      "*********",
+      chalk.green("Satellite Setup Complete"),
+      "**********"
+    );
+    console.log("***************************************");
+    console.log("***************************************");
+    console.log("***************************************");
   }
   setName(payload) {
     if (!this.info) {
@@ -95,6 +115,7 @@ class Satellite {
         }, 5000);
       });
   }
+  loadModule(name) {}
   getModuleByName(name) {
     return this.loadedModules.find(module => module.name === name);
   }
