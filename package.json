@@ -11,7 +11,7 @@
     "execa": "^3.4.0",
     "googleapis": "^45.0.0",
     "johnny-five": "^1.0.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "node-fetch": "^2.6.0",
     "nodemon": "^1.18.9",
     "open": "^7.0.0",
